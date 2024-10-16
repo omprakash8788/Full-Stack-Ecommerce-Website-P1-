@@ -1,10 +1,10 @@
-import express from 'express'
-import cors from 'cors'
-import 'dotenv/config'
-import connectDB from './config/mongodb.js';
-import connectCloudinary from './config/cloudinary.js';
+import express from "express";
+import cors from "cors";
+import "dotenv/config";
+import connectDB from "./config/mongodb.js";
+import connectCloudinary from "./config/cloudinary.js";
 
-const app = express()
+const app = express();
 const port = process.env.Port || 4000;
 connectDB();
 connectCloudinary();
@@ -12,10 +12,12 @@ connectCloudinary();
 app.use(express.json());
 app.use(cors());
 
-
-app.get('/', (req, res)=>{
-    res.send("Api is working")
+app.get("/", (req, res) => {
+  res.send("Api is working");
 });
 
-app.listen(port,()=>console.log("Server is running on port: " + port)
-)
+app.listen(port, () => console.log("Server is running on port: " + port));
+
+
+
+const testApi=[1,2,3]
