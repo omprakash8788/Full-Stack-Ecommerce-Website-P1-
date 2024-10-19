@@ -1,0 +1,1 @@
+<!-- 378, print email and password in console is done -->
