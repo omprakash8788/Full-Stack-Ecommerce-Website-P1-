@@ -23,6 +23,7 @@ const addProduct = async (req, res)=>{
         );
 
         const productData ={name, description, category, price:Number(price), subCategory, bestSeller:bestSeller==="true"? true:false, sizes:JSON.parse(sizes), image:imageUrl, date:Date.now()}
+        
 
         console.log(productData);
         
