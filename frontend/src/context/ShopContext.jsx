@@ -28,10 +28,10 @@ const ShopContextProvider=(props)=>{
         let cartData=structuredClone(cartItems);
         if(cartData[itemId]){
             if(cartData[itemId][size]){
-                cartData[itemId][size]+=1;
+                cartData[itemId][size] += 1;
             }
             else{
-                cartData[itemId][size]=1
+                cartData[itemId][size] = 1;
             }
         }
         else{
@@ -39,6 +39,17 @@ const ShopContextProvider=(props)=>{
             cartData[itemId][size]=1
         }
         setCartItems(cartData)
+        if(token){
+            try {
+                await axios.post(backendUrl + '/api/cart/add', {itemId, size}, {headers:token})
+                
+            } catch (error) {
+                console.log(error);
+                toast.error(error.message)
+                
+                
+            }
+        }
     }
 
     const getCartCount = ()=>{
@@ -99,7 +110,7 @@ const ShopContextProvider=(props)=>{
 
   const getProductData = async()=>{
     try {
-        const response = await axios.get(backendUrl + "/api/product/list")
+        const response = await axios.get(backendUrl + '/api/product/list')
         //  console.log(response.data);
         if(response.data.success){
             setProducts(response.data.products)
