@@ -1,18 +1,31 @@
-import React, { useContext, useEffect, useState } from 'react'
+// import React, { useContext, useEffect, useState } from 'react'
+import React, { useEffect, useState } from 'react';
 import { ShopContext } from '../context/ShopContext'
 import Title from './Title'
 import ProductItem from './ProductItem'
 
+import { useDispatch, useSelector } from 'react-redux';
+import { fetchProducts } from '../redux/shopSlice';
+
 
 const LatestCollection = () => {
-    const {products}=useContext(ShopContext)
+     const dispatch = useDispatch();
+     const { products, status, error } = useSelector((state) => state.shop);
+    // const {products}=useContext(ShopContext)
     // console.log(products);
+     useEffect(() => {
+    dispatch(fetchProducts());
+  }, [dispatch]);
+
     const [latestProducts, setLatestProducts]=useState([]);
     console.log(latestProducts);
     
     useEffect(()=>{
         setLatestProducts(products.slice(0,10))
     },[products])
+
+    if (status === 'loading') return <p className="text-center py-6">Loading...</p>;
+  if (status === 'failed') return <p className="text-center text-red-500 py-6">Error: {error}</p>;
     
   return (
     <div className='my-10'>
